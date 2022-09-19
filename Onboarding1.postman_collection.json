@@ -1,0 +1,1345 @@
+{
+	"info": {
+		"_postman_id": "168092f9-bf0e-440f-b6f5-3a17a9de057b",
+		"name": "Onboarding1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23321265"
+	},
+	"item": [
+		{
+			"name": "Generate Email OTP",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"verify OTP sent\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Email OTP sent\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authtoken",
+						"value": "{{MARLOAPPAUTHTOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{dev_cloud_function}}/generate-email-otp",
+					"host": [
+						"{{dev_cloud_function}}"
+					],
+					"path": [
+						"generate-email-otp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Push Notification",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"check push notification sended\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Successfully sent with response\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Testing\",\r\n    \"body\": \"Pranesh\",\r\n    \"device_ids\": [\r\n        \"eFwE6OabSJWQ4Q5-MiOf76:APA91bFK6opecT1XDrt7erAFmnle_7lxJ8Ldpmo-vkcSrV1UZcWEqtpCTSmByj1ufOvY0fb3VsBEu4vKbxrd4pW2oSWwcnIAsHcyQIRSeqDQtG2JEFoDFW73LkjE2-msvDLSk4GFs5ON\",\r\n\r\n        \"dIds2nJMSeyVHYtoftK0qZ:APA91bHSACtmrddjrSGQ9whcwcZqu3uA29qjs_JT4tLItOsBhCMtLisyKJTkY-0-cTToGIhkmQCVjt7-CxNk6_T9b8d9eGg7Y2p7FF-UzZ1qNHiT0rGToRclRwlxdHUmqIPNUvx1jMnv\",\r\n\r\n        \"d5zR4W7-RAml1YxrRzT8mk:APA91bEQmZtxqKnTgxI3zFNeH2DKR3YEemB32YmNIBPihXYhauWBeHFiMI9J2T8XDXNjQUoNaGRTRf8Mo1BaVAfcm4u8DAgVJ0I_dxabUpEzIQt1OtBlKQSVUYYPb82K4cy_H94tSihs\",\r\n\r\n\r\n        \"fWB6rRecQhWZcXgfGjTkIX:APA91bFqiqFO44TbZU18PxqSJkaDB6FGZyTAmyUsAukoF4GvQ4J0AOp6PSv8wpqnh_5k3cqrHi2zUdWKJlXMXSXvuSxxwmZlvyQG4P3rBZzgmjiMMg9kSRa4pH2IM4Y0-LMBUA7H4tiK\",\r\n        \"cc4WY2-NSFqokZWEqIGei8:APA91bFv7EzJ2E5zkwlhGNkjgS9zvhNg_8M_VFKeMFmiHfNqSDlup0bmzUFtsnQ9oZgJw_qrvIQhcHOagreY5ITEcdFk4UYUaXuWIHNwiWnT_idR6TxpwIG15zbXlY640ycdKBena8fv\",\r\n\r\n        \"epF-F7DLTDmxFlQRE1Im6y:APA91bGgrgO1Q54naEZJwUEByADKGlO1DBtWsaGY5G5QvzVWnsbwW_wa3ilt030gbgkvzyzqLrCjW4PF_HWVEY8ampB2JAydK4pBFeAwhfYEacHjyKjkmZ1bY-jLY0qzQrEUhYOZrIzj\",\r\n\r\n        \"dseqMmpySxiRZzm0iC3A-E:APA91bHICQikg7rxJaenmf-Pqecnqv8OyUkgwQh43PPTPyiq4_xnAvc9axM4bB_wLBEnm_ydfUevOzwYtNEm4dSmfkKDLR1WV_RzTCxelo8L9eMj5YGBsxRVKxevfW9T6Lq4jh-a7aeQ\"\r\n\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{dev_cloud_function}}/push",
+					"host": [
+						"{{dev_cloud_function}}"
+					],
+					"path": [
+						"push"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get company list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"  pm.test(\"Set company name and reg id \", function () {\r",
+							"      var jsonData = pm.response.json();\r",
+							"  var ress = jsonData.find(obj => {return obj.name == \"SARMAN\"});\r",
+							" console.log(ress)\r",
+							"  console.log(ress.registrationNumber)\r",
+							"  console.log(ress.name)\r",
+							"  pm.environment.set(\"selectedcompanyname\", ress.name);\r",
+							"  pm.environment.set(\"selectedcompanyregid\", ress.registrationNumber);\r",
+							"  });\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "country",
+						"value": "SG",
+						"type": "text"
+					},
+					{
+						"key": "name",
+						"value": "marlo",
+						"type": "text"
+					},
+					{
+						"key": "user_key",
+						"value": "e72fda27cb949ce568fcbeb3aa6935e9",
+						"type": "text"
+					},
+					{
+						"key": "accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.kompany.com/api/v1/company/search/name/{{country_code}}/{{companyname}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"kompany",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"company",
+						"search",
+						"name",
+						"{{country_code}}",
+						"{{companyname}}"
+					],
+					"query": [
+						{
+							"key": "cou",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Company",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check Status code\", function () {\r",
+							"\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"searching company already exists\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Company Already Exists\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// pm.request.body.update({\r",
+							"//     mode: 'raw',\r",
+							"//     raw: {\r",
+							"//     \"company_name\": pm.environment.get(\"selectedcompanyname\"),\r",
+							"//     \"registration_id\": pm.environment.get(\"selectedcompanyregid\")}\r",
+							"//     });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authtoken",
+						"value": "{{MARLOAPPAUTHTOKEN}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"company_name\" : \"{{selectedcompanyname}}\",\r\n    \"registration_id\" : \"{{selectedcompanyregid}}\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{dev_cloud_function}}/company/search",
+					"host": [
+						"{{dev_cloud_function}}"
+					],
+					"path": [
+						"company",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search NIUM Corporate Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check Status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"check search ID present\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"searchId\");\r",
+							"});\r",
+							"pm.test(\"check registration number matches\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.businessDetails.businessRegistrationNumber).to.eql(\"53335050J\");\r",
+							"});\r",
+							"\r",
+							" var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"address\", jsonData.businessDetails.addresses.registeredAddress.addressLine1);\r",
+							"pm.environment.set(\"country\", jsonData.businessDetails.addresses.registeredAddress.country);\r",
+							"pm.environment.set(\"postalcode\", jsonData.businessDetails.addresses.registeredAddress.postcode);\r",
+							"pm.environment.set(\"businesstype\", jsonData.businessDetails.businessType);\r",
+							"pm.environment.set(\"busregnumber\", jsonData.businessDetails.businessRegistrationNumber);\r",
+							"pm.environment.set(\"businessname\", jsonData.businessDetails.businessName);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authtoken",
+						"value": "{{MARLOAPPAUTHTOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{dev_cloud_function}}/onboarding/search?country_code={{country_code}}&registration_no={{selectedcompanyregid}}",
+					"host": [
+						"{{dev_cloud_function}}"
+					],
+					"path": [
+						"onboarding",
+						"search"
+					],
+					"query": [
+						{
+							"key": "country_code",
+							"value": "{{country_code}}"
+						},
+						{
+							"key": "registration_no",
+							"value": "{{selectedcompanyregid}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Company",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// pm.request.body.update({\r",
+							"//     mode: 'raw',\r",
+							"//     raw: {\r",
+							"//     \"address\": pm.environment.get(\"address\"),\r",
+							"//     \"country\": pm.environment.get(\"country\"),\r",
+							"//     \"postalcode\": pm.environment.get(\"postalcode\"),\r",
+							"//     \"businesstype\": pm.environment.get(\"businesstype\"),\r",
+							"//     \"registration_id\": pm.environment.get(\"busregnumber\"),\r",
+							"//     \"company_name\": pm.environment.get(\"businessname\")\r",
+							"//     }\r",
+							"//     });"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check Status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Check company id created\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"company_id\");\r",
+							"});\r",
+							"pm.test(\"check registration number matches\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.registration_id).to.eql(\"53335050J\");\r",
+							"});\r",
+							"var jsonData=pm.response.json();\r",
+							"pm.environment.set(\"companyid\",jsonData.company_id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authtoken",
+						"value": "{{MARLOAPPAUTHTOKEN}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"address\": \"{{address}}\",\r\n    \"country\": \"{{country}}\",\r\n    \"postalcode\": \"{{postalcode}}\",\r\n    \"businesstype\": \"{{businesstype}}\",\r\n    \"registration_id\": \"{{busregnumber}}\",\r\n    \"company_name\": \"{{businessname}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{dev_cloud_function}}/company",
+					"host": [
+						"{{dev_cloud_function}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create Company",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authtoken",
+								"value": "{{MARLOAPPAUTHTOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"company_name\": \"AOILO\",\r\n  \"registration_id\": \"gf-fdghgf-df\",\r\n  \"address1\": \"string\",\r\n  \"address2\": \"string\",\r\n  \"postcode\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev_cloud_function}}/company",
+							"host": [
+								"{{dev_cloud_function}}"
+							],
+							"path": [
+								"company"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"ad-rjdGBvuRi7QpG6joCR79eJlpZhg\""
+						},
+						{
+							"key": "function-execution-id",
+							"value": "s39n93rt6bzp"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "f623a50e68a792e6ef30784ddb619ca0;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 13 Sep 2022 17:29:22 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "173"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\""
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"company_id\": \"e7a85830-decc-49e8-92e2-4680ae625658\",\n    \"company_name\": \"AOILO\",\n    \"registration_id\": \"gf-fdghgf-df\",\n    \"error_flag\": \"CREATED\",\n    \"message\": \"Company created successfully\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Create Contact",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check Status code\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Check contact created\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.error.message).to.eql(\"Error in creating contact\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authtoken",
+						"value": "{{MARLOAPPAUTHTOKEN}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"company_id\": \"{{companyid}}\",\r\n     \"company_name\": \"SARMAN\",\r\n    \"country\": \"SG\",\r\n    \"firstname\": \"MICHAEL\",\r\n    \"lastname\": \"STAPLETON\",\r\n\"email\": \"nimodi3928@moenode.com\", \r\n    \"mobile\": \"7788887777\",\r\n    \"city\": \"chennai\",\r\n    \"job\": 1,\r\n    \"dob\": \"03/04/1992\",\r\n    \"fb_contact_id\":\"xye\",\r\n    \"address\":\"xyz\",\r\n    \"is_primary_applicant\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{dev_cloud_function}}/contacts",
+					"host": [
+						"{{dev_cloud_function}}"
+					],
+					"path": [
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Corporate Customer Onboarding",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check Status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"var regid=pm.environment.get(\"selectedcompanyregid\");\r",
+							"console.log(regid)\r",
+							"pm.test(\"Check customer already onboarded\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Already customer has been onboarded with this business registration number \"+regid);\r",
+							"});\r",
+							"pm.test(\"check onboarded customer company id\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.company_id).to.eql(pm.environment.get(\"companyid\"));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authtoken",
+						"value": "{{MARLOAPPAUTHTOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"countryCode\":\"SG\",\"registration_id\":\"{{selectedcompanyregid}}\",\"company_id\":\"{{companyid}}\",\"industrySector\":\"Charitable organisation\",\"countryOfOperation\":[\"Myanmar\",\"Belgium\",\"Bermuda\"],\"applicantDetails\":{\"kycMode\":\"E_KYC\",\"firstName\":\"ihjg\",\"lastName\":\"ghg\",\"nationality\":\"SG\",\"dateOfBirth\":\"04/07/1997\",\"isResident\":\"NO\",\"professionalDetails\":[{\"position\":\"Director\",\"sharePercentage\":\"20\"}],\"address\":{\"addressLine1\":\"38 BEACH ROAD , 06 - 11\",\"addressLine2\":null,\"city\":\"Sydney\",\"state\":\"NSW\",\"postcode\":\"189767\",\"country\":\"SG\"},\"contactDetails\":{\"countryCode\":\"SG\",\"contactNo\":\"9876543210\",\"email\":\"rsarankumar1410@gmail.com\"}},\"productDetails\":{\"productType\":[\"Cards\"],\"program\":\"SME\"}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{dev_cloud_function}}/onboarding/corporate",
+					"host": [
+						"{{dev_cloud_function}}"
+					],
+					"path": [
+						"onboarding",
+						"corporate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Members Bulk",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check Status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Check Members Generation\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Members created successfully\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authtoken",
+						"value": "{{MARLOAPPAUTHTOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"stakeholders\": [\r\n        {\r\n            \"entityType\": \"INDIVIDUAL\",\r\n            \"stakeholderDetails\": {\r\n                \"firstName\": \"MICHAEL\",\r\n                \"middleName\": \"DAVID\",\r\n                \"lastName\": \"STAPLETON\",\r\n                \"nationality\": \"AU\",\r\n                \"professionalDetails\": [\r\n                    {\r\n                        \"position\": \"Director\"\r\n                    }\r\n                ],\r\n                \"address\": {\r\n                    \"addressLine1\": \"LEVEL 6 THREE EXCHANGE SQUARE\",\r\n                    \"addressLine2\": \"8 CONNAUGHT PLACE\",\r\n                    \"country\": \"HK\",\r\n                    \"postcode\": \"640622\"\r\n                }\r\n            }\r\n        },\r\n        {\r\n            \"entityType\": \"INDIVIDUAL\",\r\n            \"stakeholderDetails\": {\r\n                \"firstName\": \"LEE\",\r\n                \"middleName\": \"WEI\",\r\n                \"lastName\": \"HSIUNG\",\r\n                \"nationality\": \"SG\",\r\n                \"professionalDetails\": [\r\n                    {\r\n                        \"position\": \"Ultimate Beneficial Owner\"\r\n                    }\r\n                ],\r\n                \"address\": {\r\n                    \"addressLine1\": \"633 JURONG WEST STREET 65\",\r\n                    \"addressLine2\": \"10-310\",\r\n                    \"country\": \"SG\",\r\n                    \"postcode\": \"640633\"\r\n                }\r\n            }\r\n        },\r\n        {\r\n            \"entityType\": \"INDIVIDUAL\",\r\n            \"stakeholderDetails\": {\r\n                \"firstName\": \"JOANNA\",\r\n                \"middleName\": \"LIM LAN\",\r\n                \"lastName\": \"SIM\",\r\n                \"nationality\": \"SG\",\r\n                \"professionalDetails\": [\r\n                    {\r\n                        \"position\": \"Shareholder\"\r\n                    }\r\n                ],\r\n                \"address\": {\r\n                    \"addressLine1\": \"165 TAMPINES STREET 12\",\r\n                    \"addressLine2\": \"09-305\",\r\n                    \"country\": \"SG\",\r\n                    \"postcode\": \"521165\"\r\n                }\r\n            }\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{dev_cloud_function}}/company/{{companyid}}/members/bulk-create",
+					"host": [
+						"{{dev_cloud_function}}"
+					],
+					"path": [
+						"company",
+						"{{companyid}}",
+						"members",
+						"bulk-create"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create Members Bulk",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authtoken",
+								"value": "{{MARLOAPPAUTHTOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"stakeholders\": [\r\n        {\r\n            \"entityType\": \"INDIVIDUAL\",\r\n            \"stakeholderDetails\": {\r\n                \"firstName\": \"MICHAEL\",\r\n                \"middleName\": \"DAVID\",\r\n                \"lastName\": \"STAPLETON\",\r\n                \"nationality\": \"AU\",\r\n                \"professionalDetails\": [\r\n                    {\r\n                        \"position\": \"Director\"\r\n                    }\r\n                ],\r\n                \"address\": {\r\n                    \"addressLine1\": \"LEVEL 6 THREE EXCHANGE SQUARE\",\r\n                    \"addressLine2\": \"8 CONNAUGHT PLACE\",\r\n                    \"country\": \"HK\",\r\n                    \"postcode\": \"640622\"\r\n                }\r\n            }\r\n        },\r\n        {\r\n            \"entityType\": \"INDIVIDUAL\",\r\n            \"stakeholderDetails\": {\r\n                \"firstName\": \"LEE\",\r\n                \"middleName\": \"WEI\",\r\n                \"lastName\": \"HSIUNG\",\r\n                \"nationality\": \"SG\",\r\n                \"professionalDetails\": [\r\n                    {\r\n                        \"position\": \"Ultimate Beneficial Owner\"\r\n                    }\r\n                ],\r\n                \"address\": {\r\n                    \"addressLine1\": \"633 JURONG WEST STREET 65\",\r\n                    \"addressLine2\": \"10-310\",\r\n                    \"country\": \"SG\",\r\n                    \"postcode\": \"640633\"\r\n                }\r\n            }\r\n        },\r\n        {\r\n            \"entityType\": \"INDIVIDUAL\",\r\n            \"stakeholderDetails\": {\r\n                \"firstName\": \"JOANNA\",\r\n                \"middleName\": \"LIM LAN\",\r\n                \"lastName\": \"SIM\",\r\n                \"nationality\": \"SG\",\r\n                \"professionalDetails\": [\r\n                    {\r\n                        \"position\": \"Shareholder\"\r\n                    }\r\n                ],\r\n                \"address\": {\r\n                    \"addressLine1\": \"165 TAMPINES STREET 12\",\r\n                    \"addressLine2\": \"09-305\",\r\n                    \"country\": \"SG\",\r\n                    \"postcode\": \"521165\"\r\n                }\r\n            }\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev_cloud_function}}/company/e7a85830-decc-49e8-92e2-4680ae625658/members/bulk-create",
+							"host": [
+								"{{dev_cloud_function}}"
+							],
+							"path": [
+								"company",
+								"e7a85830-decc-49e8-92e2-4680ae625658",
+								"members",
+								"bulk-create"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"21d-KJmlEtnR443OVimiNHAKpm7/s7A\""
+						},
+						{
+							"key": "function-execution-id",
+							"value": "s39nnxr7u5lc"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "f607480e2ce9155aa9fea7641b03a659;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 13 Sep 2022 18:04:00 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "541"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\""
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_flag\": \"CREATED\",\n    \"message\": \"Members created successfully\",\n    \"data\": [\n        {\n            \"member_id\": \"cdd35b52-af5f-4617-b5c3-1c48dea9564f\",\n            \"firstname\": \"MICHAEL\",\n            \"lastname\": \"STAPLETON\",\n            \"email\": \"\",\n            \"dob\": \"\",\n            \"isactive\": \"true\",\n            \"member_type\": \"Director\"\n        },\n        {\n            \"member_id\": \"42da2231-54ea-42e0-a5fc-e26f40458aaa\",\n            \"firstname\": \"LEE\",\n            \"lastname\": \"HSIUNG\",\n            \"email\": \"\",\n            \"dob\": \"\",\n            \"isactive\": \"true\",\n            \"member_type\": \"UBO\"\n        },\n        {\n            \"member_id\": \"9ab3e81b-2e2f-404c-9e02-0408290de082\",\n            \"firstname\": \"JOANNA\",\n            \"lastname\": \"SIM\",\n            \"email\": \"\",\n            \"dob\": \"\",\n            \"isactive\": \"true\",\n            \"member_type\": \"Shareholder\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Director List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check Status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							" pm.test(\"Getting Directors List\", function () {\r",
+							"     var jsonData = pm.response.json();\r",
+							"     pm.expect(jsonData.message).to.eql(\"DIRECTORS_LIST\");\r",
+							" });\r",
+							"  pm.test(\"Checking directors firstname\", function () {\r",
+							"      var jsonData = pm.response.json();\r",
+							"      var response = jsonData.data;\r",
+							"      var res1 = response.find(obj => {return obj.member_id == \"41afb4fb-561e-4567-8813-247d5cf898fe\"});\r",
+							"      pm.expect(res1.firstname).to.eql(\"MICHAEL\");\r",
+							"     // pm.expect(res1.company_id).to.eql(companyid);\r",
+							"     \r",
+							"     \r",
+							" });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authtoken",
+						"value": "{{MARLOAPPAUTHTOKEN}}",
+						"type": "text"
+					},
+					{
+						"key": "accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{dev_cloud_function}}/company/{{companyid}}/director",
+					"host": [
+						"{{dev_cloud_function}}"
+					],
+					"path": [
+						"company",
+						"{{companyid}}",
+						"director"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Member Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check Status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"check member is updated\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Successfully modified the member\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "authtoken",
+						"value": "{{MARLOAPPAUTHTOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstname\": \"MICHAEL\",\r\n  \"lastname\": \"STAPLETON\",\r\n  \"isactive\": true,\r\n  \"member_type\":6,\r\n  \"dob\": \"1997-01-14\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{dev_cloud_function}}/company/{{companyid}}/members/{{memberid}}",
+					"host": [
+						"{{dev_cloud_function}}"
+					],
+					"path": [
+						"company",
+						"{{companyid}}",
+						"members",
+						"{{memberid}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update Member Details",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authtoken",
+								"value": "{{MARLOAPPAUTHTOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"sdergf@gmail.com\",\r\n    \"dob\": \"1978-03-30\",\r\n    \"member_type\": 8\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev_cloud_function}}/company/{{company_id}}/members/cdd35b52-af5f-4617-b5c3-1c48dea9564f",
+							"host": [
+								"{{dev_cloud_function}}"
+							],
+							"path": [
+								"company",
+								"{{company_id}}",
+								"members",
+								"cdd35b52-af5f-4617-b5c3-1c48dea9564f"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"4c-BrH5aonG8898C6VvudonKRgL6rE\""
+						},
+						{
+							"key": "function-execution-id",
+							"value": "mtzaiy53wfrn"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "e25e07dacf5f2915d13e1ed52a6569ae;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 13 Sep 2022 18:39:07 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "76"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\""
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error_flag\": \"MEMBER_UPDATED\",\n    \"message\": \"Successfully modified the member\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Create Members",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check Status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Check member created \", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Successfully created a member\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authtoken",
+						"value": "{{MARLOAPPAUTHTOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstname\": \"mani\",\r\n  \"lastname\": \"hawal\",\r\n  \"email\": \"mohit@gmail.com\",\r\n  \"member_type\": 7,\r\n  \"dob\": \"1999-03-14\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{dev_cloud_function}}/company/{{companyid}}/members",
+					"host": [
+						"{{dev_cloud_function}}"
+					],
+					"path": [
+						"company",
+						"{{companyid}}",
+						"members"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get UBO List",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authtoken",
+						"value": "{{MARLOAPPAUTHTOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{dev_cloud_function}}/company/57573048-1637-4602-97c0-e8ad546de90c/ubo",
+					"host": [
+						"{{dev_cloud_function}}"
+					],
+					"path": [
+						"company",
+						"57573048-1637-4602-97c0-e8ad546de90c",
+						"ubo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Configs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"CheckStatus code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Getting config details\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"CONFIGS_DETAILS\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{dev_cloud_function}}/common/configs",
+					"host": [
+						"{{dev_cloud_function}}"
+					],
+					"path": [
+						"common",
+						"configs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Quiz Category Options",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check Status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Check Quiz generated\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Quiz Options\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{dev_cloud_function}}/quiz/categories/14/options",
+					"host": [
+						"{{dev_cloud_function}}"
+					],
+					"path": [
+						"quiz",
+						"categories",
+						"14",
+						"options"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Quiz",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check Status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Check quiz posted\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Successfully completed the onboarding quiz\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authtoken",
+						"value": "{{MARLOAPPAUTHTOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"result\": [\r\n        {\r\n            \"qid\": 5,\r\n            \"answer\": \"Cargo Broker\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{dev_cloud_function}}/quiz/",
+					"host": [
+						"{{dev_cloud_function}}"
+					],
+					"path": [
+						"quiz",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Company",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check Status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Checking record created\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.result).to.eql(\"Total 1 record updated\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "authtoken",
+						"value": "{{MARLOAPPAUTHTOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company_name\": \"VTRY\",\r\n  \"address1\": \"string\",\r\n  \"address2\": \"string\",\r\n  \"postcode\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{dev_cloud_function}}/company/{{companyid}}",
+					"host": [
+						"{{dev_cloud_function}}"
+					],
+					"path": [
+						"company",
+						"{{companyid}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check Status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Getting user Info\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"User Info\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authtoken",
+						"value": "{{MARLOAPPAUTHTOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{dev_cloud_function}}/contacts/info",
+					"host": [
+						"{{dev_cloud_function}}"
+					],
+					"path": [
+						"contacts",
+						"info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Device",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check Status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Check Device created for push notification\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Device created for push notification\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authtoken",
+						"value": "{{MARLOAPPAUTHTOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"fcm_token\": \"dVdLImIcRKe3M8E0OZCH1V:APA91bHMd5pV5pgr_gxGHIGDXwG7acHcfKkSYxUHfPUeSlnwNMBF7zTafJxx3lAP2w9kXLne035pR9JelqYcCA4GoMWrOl7t-V_VxYB-gqzcyUET7Q9i0LHKOD82hOjq2OBGUKBLlrGf\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{dev_cloud_function}}/devices",
+					"host": [
+						"{{dev_cloud_function}}"
+					],
+					"path": [
+						"devices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Onboard Completed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check Status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Checking onboard completion\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Successfully onboarding completed\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "authtoken",
+						"value": "{{MARLOAPPAUTHTOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"contact_id\":\"4473d249-c976-4bc4-9348-d1b2788b7636\",\r\n   \"iscompleted\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{dev_cloud_function}}/company/{{companyid}}/onboard-completed",
+					"host": [
+						"{{dev_cloud_function}}"
+					],
+					"path": [
+						"company",
+						"{{companyid}}",
+						"onboard-completed"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": ""
+		},
+		{
+			"key": "companyregid",
+			"value": ""
+		},
+		{
+			"key": "regid",
+			"value": ""
+		},
+		{
+			"key": "companyname",
+			"value": ""
+		},
+		{
+			"key": "name",
+			"value": ""
+		}
+	]
+}
